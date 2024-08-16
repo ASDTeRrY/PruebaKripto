@@ -1,0 +1,38 @@
+package com.kripto.pruebakripto.di
+
+import android.content.Context
+import android.content.pm.PackageManager
+import com.kripto.pruebakripto.data.repository.AppRepository
+import com.kripto.pruebakripto.data.repository.AppRepositoryImpl
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+object AppModule {
+    @Provides
+    fun providePackageManager(@ApplicationContext context: Context): PackageManager {
+        return context.packageManager
+    }
+
+    @Provides
+    fun provideAppRepository(packageManager: PackageManager, context: Context): AppRepository {
+        return AppRepositoryImpl(packageManager, context)
+    }
+
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+object ContextModule {
+
+    @Provides
+    @Singleton
+    fun provideContext(@ApplicationContext context: Context): Context {
+        return context
+    }
+}

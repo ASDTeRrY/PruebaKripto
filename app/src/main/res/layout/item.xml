@@ -1,0 +1,101 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="4dp">
+
+        <ImageView
+            android:id="@+id/app_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="App Icon"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:text="App Name"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/app_package_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Package Name"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/app_memory_usage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Memory Usage"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/app_storage_usage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Storage Usage"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/app_frequency_of_use"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Storage Usage"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/app_total_time_in_foreground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Storage Usage"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/app_last_used"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Storage Usage"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/app_permissions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Storage Usage"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/app_install_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Storage Usage"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/app_last_update_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Storage Usage"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/app_is_system_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Storage Usage"
+        android:textSize="14sp" />
+</LinearLayout>
