@@ -4,8 +4,8 @@ import com.kripto.pruebakripto.data.database.entity.AppInfoEntity
 import com.kripto.pruebakripto.data.repository.AppRepository
 import javax.inject.Inject
 
-class GetInstalledAppsUseCase @Inject constructor(
+class DeleteAppUseCase @Inject constructor(
     private val appRepository: AppRepository
 ) {
-    suspend operator fun invoke(): List<AppInfoEntity>  =  appRepository.getInstalledApps()
+    suspend operator fun invoke(id: Int): Boolean  =  appRepository.deleteAppInfo(id)
 }

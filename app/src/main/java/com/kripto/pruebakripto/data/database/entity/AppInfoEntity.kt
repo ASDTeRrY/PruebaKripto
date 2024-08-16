@@ -1,6 +1,12 @@
 package com.kripto.pruebakripto.data.database.entity
 
-data class AppInfo(
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "AppInfo", indices = [Index(value = ["id"])])
+data class AppInfoEntity(
+    @PrimaryKey(autoGenerate = true)val id: Int,
     val name: String,
     val packageName: String,
     val memoryUsage: String,  // Uso de memoria en bytes
@@ -8,7 +14,6 @@ data class AppInfo(
     val frequencyOfUse: Int,  // Frecuencia de uso
     val totalTimeInForeground: Long,  // Tiempo total en primer plano
     val lastUsed: String,  // Última vez que se usó
-    val permissions: List<String>,  // Permisos solicitados
     val installTime: String,  // Fecha de instalación
     val lastUpdateTime: String,  // Fecha de última actualización
     val isSystemApp: Boolean  // Es una aplicación del sistema

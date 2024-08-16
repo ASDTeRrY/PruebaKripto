@@ -1,8 +1,9 @@
 package com.kripto.pruebakripto.data.repository
 
-import com.kripto.pruebakripto.data.database.entity.AppInfo
+import com.kripto.pruebakripto.data.database.entity.AppInfoEntity
 
 
 interface AppRepository {
-    fun getInstalledApps(): List<AppInfo>
+    suspend fun getInstalledApps(): List<AppInfoEntity>
+    suspend fun deleteAppInfo(id: Int): Boolean
 }

@@ -24,7 +24,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     private fun initViews() {
-        adapter = RecyclerAdapter(requireContext())
+        adapter = RecyclerAdapter(requireContext()) { adapterView, item ->
+            viewModel.delete(item.id)
+        }
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
     }

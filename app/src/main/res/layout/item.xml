@@ -1,101 +1,145 @@
-<LinearLayout
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cvClear"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp">
+    android:layout_margin="10dp"
+    app:cardCornerRadius="15dp">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="4dp">
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        android:orientation="vertical"
+        android:background="@drawable/gradient_background">
 
-        <ImageView
-            android:id="@+id/app_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:contentDescription="App Icon"
-            android:layout_gravity="center_vertical" />
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="15dp">
 
-        <TextView
-            android:id="@+id/app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:paddingStart="8dp"
-            android:text="App Name"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/app_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:contentDescription="App Icon"
+                android:layout_gravity="center_vertical" />
 
-    <TextView
-        android:id="@+id/app_package_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Package Name"
-        android:textSize="14sp" />
+            <TextView
+                android:id="@+id/app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="8dp"
+                android:text="App Name"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/app_memory_usage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Memory Usage"
-        android:textSize="14sp" />
+            <ImageView
+                android:id="@+id/app_icon_delete"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:contentDescription="App Icon"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/baseline_delete_24"
+                app:tint="@color/white" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <TextView
-        android:id="@+id/app_storage_usage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Storage Usage"
-        android:textSize="14sp" />
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/app_frequency_of_use"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Storage Usage"
-        android:textSize="14sp" />
+            <TextView
+                android:id="@+id/app_package_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Package Name"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/app_total_time_in_foreground"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Storage Usage"
-        android:textSize="14sp" />
+            <TextView
+                android:id="@+id/app_memory_usage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Memory Usage"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/app_last_used"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Storage Usage"
-        android:textSize="14sp" />
+            <TextView
+                android:id="@+id/app_storage_usage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Storage Usage"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/app_permissions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Storage Usage"
-        android:textSize="14sp" />
+            <TextView
+                android:id="@+id/app_frequency_of_use"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Storage Usage"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/app_install_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Storage Usage"
-        android:textSize="14sp" />
+            <TextView
+                android:id="@+id/app_total_time_in_foreground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Storage Usage"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/app_last_update_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Storage Usage"
-        android:textSize="14sp" />
+            <TextView
+                android:id="@+id/app_last_used"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Storage Usage"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/app_is_system_app"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Storage Usage"
-        android:textSize="14sp" />
-</LinearLayout>
+            <TextView
+                android:id="@+id/app_permissions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Storage Usage"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/app_install_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Storage Usage"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/app_last_update_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Storage Usage"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/app_is_system_app"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Storage Usage"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+</androidx.cardview.widget.CardView>

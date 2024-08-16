@@ -1,7 +1,6 @@
 package com.kripto.pruebakripto.data.repository
 
 import android.app.ActivityManager
-import android.app.usage.StorageStatsManager
 import android.app.usage.UsageStats
 import android.app.usage.UsageStatsManager
 import android.content.Context
@@ -10,9 +9,9 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.os.Build
-import android.os.storage.StorageManager
 import androidx.annotation.RequiresApi
-import com.kripto.pruebakripto.data.database.entity.AppInfo
+import com.kripto.pruebakripto.data.database.dao.AppInfoDao
+import com.kripto.pruebakripto.data.database.entity.AppInfoEntity
 import java.io.File
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
@@ -22,19 +21,32 @@ import java.util.Locale
 import javax.inject.Inject
 
 class AppRepositoryImpl @Inject constructor(
+    private val appInfoDao: AppInfoDao,
     private val packageManager: PackageManager,
     private val context: Context
 ) : AppRepository {
-    override fun getInstalledApps(): List<AppInfo> {
+    override suspend fun getInstalledApps(): List<AppInfoEntity> {
         val intent = Intent(Intent.ACTION_MAIN, null).apply {
             addCategory(Intent.CATEGORY_LAUNCHER)
         }
         val apps = packageManager.queryIntentActivities(intent, 0)
-        return apps.map { resolveInfo -> getAppInfo(resolveInfo) }
+        val listApps = apps.map { resolveInfo -> getAppInfo(resolveInfo) }
+        appInfoDao.insertAllAppInfo(listApps)
+        return appInfoDao.getAllAppInfo().asReversed().sortedByDescending { it.isSystemApp }
     }
 
+    override suspend fun deleteAppInfo(id: Int): Boolean {
+        kotlin.runCatching { appInfoDao.deleteAppInfo(id) }
+            .onSuccess {
+                return true
+            }
+            .onFailure {
+                return false
+            }
+        return false
+    }
 
-    private fun getAppInfo(resolveInfo: ResolveInfo): AppInfo {
+    private fun getAppInfo(resolveInfo: ResolveInfo): AppInfoEntity {
         val packageManager = context.packageManager
         val packageName = resolveInfo.activityInfo.packageName
 
@@ -49,22 +61,23 @@ class AppRepositoryImpl @Inject constructor(
         val permissions = getAppPermissions(packageName)
         val installTime = getAppInstallTime(packageName)
         val lastUpdateTime = getAppLastUpdateTime(packageName)
-        val isSystemApp = (resolveInfo.activityInfo.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM) != 0
+        val isSystemApp =
+            (resolveInfo.activityInfo.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM) != 0
         val lastUsedFormatted = usageStats?.lastTimeUsed?.let {
             formatDate(it)
         } ?: "N/A"
 
         val installTimeFormatted = formatDate(installTime)
         val lastUpdateTimeFormatted = formatDate(lastUpdateTime)
-        return AppInfo(
+        return AppInfoEntity(
+            id = 0,
             name = resolveInfo.loadLabel(packageManager).toString(),
             packageName = packageName,
             memoryUsage = memoryUsage,
             storageUsage = storageUsage,
             frequencyOfUse = usageStats?.totalTimeInForeground?.toInt() ?: 0,
-            totalTimeInForeground =  usageStats?.totalTimeInForeground?.let { it / 1000 } ?: 0L,
+            totalTimeInForeground = usageStats?.totalTimeInForeground?.let { it / 1000 } ?: 0L,
             lastUsed = lastUsedFormatted,
-            permissions = permissions,
             installTime = installTimeFormatted,
             lastUpdateTime = lastUpdateTimeFormatted,
             isSystemApp = isSystemApp
@@ -98,7 +111,8 @@ class AppRepositoryImpl @Inject constructor(
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun getAppUsageStats(packageName: String): UsageStats? {
-        val usageStatsManager = context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+        val usageStatsManager =
+            context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
         val currentTime = System.currentTimeMillis()
         val stats = usageStatsManager.queryUsageStats(
             UsageStatsManager.INTERVAL_DAILY,
@@ -109,7 +123,10 @@ class AppRepositoryImpl @Inject constructor(
     }
 
     private fun getAppPermissions(packageName: String): List<String> {
-        return packageManager.getPackageInfo(packageName, PackageManager.GET_PERMISSIONS).requestedPermissions?.toList() ?: emptyList()
+        return packageManager.getPackageInfo(
+            packageName,
+            PackageManager.GET_PERMISSIONS
+        ).requestedPermissions?.toList() ?: emptyList()
     }
 
     private fun getAppInstallTime(packageName: String): Long {
